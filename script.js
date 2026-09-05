@@ -926,7 +926,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* --- 12. Golden Firefly Ambient Canvas Particles --- */
+  /* --- 12. Pure White Twinkling Stardust Ambient Canvas Particles --- */
   const pCanvas = document.getElementById('bg-particles');
   if (pCanvas) {
     const ctx = pCanvas.getContext('2d');
@@ -939,21 +939,57 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const particles = [];
-    const particleCount = 45;
-    const colors = ['rgba(212, 175, 55, ', 'rgba(255, 215, 0, ', 'rgba(255, 236, 179, '];
+    const particleCount = 60;
+    const whiteColors = [
+      'rgba(255, 255, 255, ',
+      'rgba(240, 246, 255, ',
+      'rgba(224, 242, 254, ',
+      'rgba(255, 255, 255, '
+    ];
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        radius: Math.random() * 2.2 + 0.8,
-        colorPrefix: colors[Math.floor(Math.random() * colors.length)],
-        alpha: Math.random() * 0.7 + 0.2,
-        speedY: Math.random() * 0.5 + 0.15,
+        radius: Math.random() * 2.4 + 0.8,
+        colorPrefix: whiteColors[Math.floor(Math.random() * whiteColors.length)],
+        alpha: Math.random() * 0.75 + 0.25,
+        speedY: Math.random() * 0.45 + 0.12,
         speedX: Math.random() * 0.3 - 0.15,
-        pulseSpeed: Math.random() * 0.02 + 0.008,
-        pulseOffset: Math.random() * Math.PI * 2
+        pulseSpeed: Math.random() * 0.025 + 0.01,
+        pulseOffset: Math.random() * Math.PI * 2,
+        isSparkleStar: Math.random() < 0.4 // 40% are glowing 4-point white stars!
       });
+    }
+
+    function drawWhiteStar(cx, cy, outerR, innerR, alpha) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+      ctx.shadowBlur = 14;
+      ctx.shadowColor = 'rgba(255, 255, 255, 0.95)';
+
+      let rot = Math.PI / 2 * 3;
+      let x = cx;
+      let y = cy;
+      let step = Math.PI / 4;
+
+      ctx.moveTo(cx, cy - outerR);
+      for (let i = 0; i < 4; i++) {
+        x = cx + Math.cos(rot) * outerR;
+        y = cy + Math.sin(rot) * outerR;
+        ctx.lineTo(x, y);
+        rot += step;
+
+        x = cx + Math.cos(rot) * innerR;
+        y = cy + Math.sin(rot) * innerR;
+        ctx.lineTo(x, y);
+        rot += step;
+      }
+      ctx.lineTo(cx, cy - outerR);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
     }
 
     let timeStep = 0;
@@ -963,21 +999,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
       particles.forEach(p => {
         p.y -= p.speedY;
-        p.x += Math.sin(timeStep + p.pulseOffset) * 0.4 + p.speedX;
+        p.x += Math.sin(timeStep + p.pulseOffset) * 0.35 + p.speedX;
 
         // Reset particle if it drifts off screen
         if (p.y < -10) p.y = height + 10;
         if (p.x < -10) p.x = width + 10;
         if (p.x > width + 10) p.x = -10;
 
-        const dynamicAlpha = p.alpha * (0.5 + 0.5 * Math.sin(timeStep * 2 + p.pulseOffset));
+        const dynamicAlpha = Math.max(0.15, p.alpha * (0.55 + 0.45 * Math.sin(timeStep * 3 + p.pulseOffset)));
 
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = p.colorPrefix + dynamicAlpha + ')';
-        ctx.shadowBlur = 12;
-        ctx.shadowColor = 'rgba(212, 175, 55, 0.8)';
-        ctx.fill();
+        if (p.isSparkleStar) {
+          const starSize = p.radius * 2.4;
+          drawWhiteStar(p.x, p.y, starSize, starSize * 0.35, dynamicAlpha);
+        } else {
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p.colorPrefix + dynamicAlpha + ')';
+          ctx.shadowBlur = 12;
+          ctx.shadowColor = 'rgba(255, 255, 255, 0.85)';
+          ctx.fill();
+          ctx.restore();
+        }
       });
 
       requestAnimationFrame(animateParticles);
