@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jejak Pamulihan Memories - Kenangan KKN Desa Pamulihan</title>
+  <meta name="description" content="Website kenangan KKN Desa Pamulihan. Tempat mengukir tawa, perjuangan, galeri foto, dan kata-kata kenangan indah bersama tim dan warga desa.">
+  
+  <!-- OpenGraph Metadata -->
+  <meta property="og:title" content="Jejak Pamulihan Memories">
+  <meta property="og:description" content="Website Kenangan KKN Desa Pamulihan - Elegan & Profesional">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Fullscreen Animated Blurred Background Slideshow -->
+  <div class="bg-slideshow-container" id="bg-slideshow">
+    <div class="bg-slide-layer layer-a active"></div>
+    <div class="bg-slide-layer layer-b"></div>
+    <div class="bg-slideshow-overlay"></div>
+  </div>
+
+  <!-- Interactive Golden Firefly Particles Canvas -->
+  <canvas id="bg-particles"></canvas>
+
+  <!-- Audio Player Elements -->
+  <audio id="bg-audio" loop preload="auto">
+    <source src="audio/sampai-jadi-debu.webm" type="audio/webm">
+    <source src="audio/sampai-jadi-debu.mp3" type="audio/mpeg">
+    <source src="sampai-jadi-debu.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Navigation Header -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#hero" class="nav-logo">
+        <img src="images/Logo KKN.png" alt="Logo KKN Pamulihan" class="nav-logo-img">
+        <span>Jejak Pamulihan</span>
+      </a>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="#hero" class="nav-link active">Beranda</a></li>
+        <li><a href="#pengurus" class="nav-link">Struktur Pengurus</a></li>
+        <li><a href="#quotes" class="nav-link">Kata Kenangan</a></li>
+        <li><a href="#galeri" class="nav-link">Galeri Foto</a></li>
+        <li><a href="#video" class="nav-link">Video Kenangan</a></li>
+        <li><a href="#memorywall" class="nav-link">Memory Wall</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn-audio" id="btn-audio" title="Putar Musik Ambient" aria-label="Audio Music Toggle">
+          <i class="fa-solid fa-music"></i>
+        </button>
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Buka Menu Navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section (Centred Big Logo & Big Title) -->
+  <section class="hero hero-centered" id="hero">
+    <div class="hero-glow"></div>
+    <div class="container hero-centered-container">
+      <!-- Big Logo KKN -->
+      <div class="hero-logo-box">
+        <img src="images/Logo KKN.png" alt="Logo KKN Desa Pamulihan" class="hero-logo-large">
+      </div>
+
+      <!-- Big Title Jejak Pamulihan Memories with Typewriter Effect -->
+      <h1 class="hero-title-large" id="typewriter-title">
+        Jejak Pamulihan <br>
+        <span class="text-gold-bright">Memories</span>
+      </h1>
+      <p class="hero-subtitle-centered" id="typewriter-sub">KKN 05 UNUGHA Desa Pamulihan</p>
+    </div>
+  </section>
+
+  <!-- Section: Struktur Pengurus KKN (Top Beranda) -->
+  <section class="section team-section" id="pengurus">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <i class="fa-solid fa-users"></i>
+          <span>Struktur Organisasi</span>
+        </div>
+        <h2 class="section-title">Struktur Pengurus KKN</h2>
+        <p class="section-description">
+          Tim hebat di balik suksesnya program kerja dan kebersamaan KKN Desa Pamulihan.
+        </p>
+      </div>
+
+      <div class="team-slider-wrapper">
+        <button class="slider-btn prev-btn" id="team-prev" aria-label="Pengurus Sebelumnya">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <div class="team-slider-container" id="team-slider-container">
+          <div class="team-slider-track" id="team-slider-track">
+            <!-- Kordes -->
+            <div class="glass-card team-card">
+              <div class="team-img-wrapper">
+                <img src="images/Struktur Pengurus/Kordes.jpeg" alt="Koordinator Desa" class="team-img team-img-kordes" loading="lazy">
+                <div class="team-overlay"></div>
+              </div>
+              <div class="team-info">
+                <span class="team-role">Koordinator Desa</span>
+                <h3 class="team-name">Kordes Pamulihan</h3>
+                <p class="team-quote">"Memimpin dengan hati, mengabdi untuk desa."</p>
+              </div>
+            </div>
+
+            <!-- Sekretaris 1 -->
+            <div class="glass-card team-card">
+              <div class="team-img-wrapper">
+                <img src="images/Struktur Pengurus/Sekretaris 1.jpeg" alt="Sekretaris 1" class="team-img team-img-sekre1" loading="lazy">
+                <div class="team-overlay"></div>
+              </div>
+              <div class="team-info">
+                <span class="team-role">Sekretaris I</span>
+                <h3 class="team-name">Sekretaris Utama</h3>
+                <p class="team-quote">"Rapi dalam berkas, tertib administrasi."</p>
+              </div>
+            </div>
+
+            <!-- Sekretaris 2 -->
+            <div class="glass-card team-card">
+              <div class="team-img-wrapper">
+                <img src="images/Struktur Pengurus/Sekretaris 2.jpeg" alt="Sekretaris 2" class="team-img team-img-sekre2" loading="lazy">
+                <div class="team-overlay"></div>
+              </div>
+              <div class="team-info">
+                <span class="team-role">Sekretaris II</span>
+                <h3 class="team-name">Sekretaris Pendamping</h3>
+                <p class="team-quote">"Mencatat setiap momen & laporan kegiatan."</p>
+              </div>
+            </div>
+
+            <!-- Bendahara -->
+            <div class="glass-card team-card">
+              <div class="team-img-wrapper">
+                <img src="images/Struktur Pengurus/Bendahara.jpeg" alt="Bendahara" class="team-img team-img-bendahara" loading="lazy">
+                <div class="team-overlay"></div>
+              </div>
+              <div class="team-info">
+                <span class="team-role">Bendahara</span>
+                <h3 class="team-name">Bendahara Posko</h3>
+                <p class="team-quote">"Setiap rupiah terkendali demi kelancaran proker."</p>
+              </div>
+            </div>
+
+            <!-- Sie Acara 1 -->
+            <div class="glass-card team-card">
+              <div class="team-img-wrapper">
+                <img src="images/Struktur Pengurus/Sie Acara 1.jpeg" alt="Sie Acara 1" class="team-img team-img-acara1" loading="lazy">
+                <div class="team-overlay"></div>
+              </div>
+              <div class="team-info">
+                <span class="team-role">Sie Acara (Ketua)</span>
+                <h3 class="team-name">Koordinator Acara</h3>
+                <p class="team-quote">"Rangkaian kegiatan seru & terkonsep matang."</p>
+              </div>
+            </div>
+
+            <!-- Sie Acara 2 -->
+            <div class="glass-card team-card">
+              <div class="team-img-wrapper">
+                <img src="images/Struktur Pengurus/Sie Acara 2.jpeg" alt="Sie Acara 2" class="team-img team-img-acara2" loading="lazy">
+                <div class="team-overlay"></div>
+              </div>
+              <div class="team-info">
+                <span class="team-role">Sie Acara</span>
+                <h3 class="team-name">Tim Pelaksana Acara</h3>
+                <p class="team-quote">"Menciptakan keceriaan di setiap event."</p>
+              </div>
+            </div>
+
+            <!-- Sie Humas 1 -->
+            <div class="glass-card team-card">
+              <div class="team-img-wrapper">
+                <img src="images/Struktur Pengurus/Sie Humas 1.jpeg" alt="Sie Humas 1" class="team-img team-img-humas1" loading="lazy">
+                <div class="team-overlay"></div>
+              </div>
+              <div class="team-info">
+                <span class="team-role">Sie Humas (Ketua)</span>
+                <h3 class="team-name">Koordinator Humas</h3>
+                <p class="team-quote">"Menjembatani mahasiswa dengan warga desa."</p>
+              </div>
+            </div>
+
+            <!-- Sie Humas 2 -->
+            <div class="glass-card team-card">
+              <div class="team-img-wrapper">
+                <img src="images/Struktur Pengurus/Sie Humas 2.jpeg" alt="Sie Humas 2" class="team-img team-img-humas2" loading="lazy">
+                <div class="team-overlay"></div>
+              </div>
+              <div class="team-info">
+                <span class="team-role">Sie Humas</span>
+                <h3 class="team-name">Tim Hubungan Masyarakat</h3>
+                <p class="team-quote">"Senyum dan komunikasi hangat di mana saja."</p>
+              </div>
+            </div>
+
+            <!-- Sie Konsumsi 1 -->
+            <div class="glass-card team-card">
+              <div class="team-img-wrapper">
+                <img src="images/Struktur Pengurus/Sie Konsumsi 1.jpeg" alt="Sie Konsumsi 1" class="team-img team-img-konsumsi1" loading="lazy">
+                <div class="team-overlay"></div>
+              </div>
+              <div class="team-info">
+                <span class="team-role">Sie Konsumsi (Ketua)</span>
+                <h3 class="team-name">Koordinator Konsumsi</h3>
+                <p class="team-quote">"Penyelamat perut anggota di kala lapar."</p>
+              </div>
+            </div>
+
+            <!-- Sie Konsumsi 2 -->
+            <div class="glass-card team-card">
+              <div class="team-img-wrapper">
+                <img src="images/Struktur Pengurus/Sie Konsumsi 2.jpeg" alt="Sie Konsumsi 2" class="team-img team-img-konsumsi2" loading="lazy">
+                <div class="team-overlay"></div>
+              </div>
+              <div class="team-info">
+                <span class="team-role">Sie Konsumsi</span>
+                <h3 class="team-name">Tim Konsumsi</h3>
+                <p class="team-quote">"Masakan lezat & gizi posko selalu siap."</p>
+              </div>
+            </div>
+
+            <!-- Sie PDD 1 -->
+            <div class="glass-card team-card">
+              <div class="team-img-wrapper">
+                <img src="images/Struktur Pengurus/Sie PDD 1.jpeg" alt="Sie PDD 1" class="team-img team-img-pdd1" loading="lazy">
+                <div class="team-overlay"></div>
+              </div>
+              <div class="team-info">
+                <span class="team-role">Sie PDD (Ketua)</span>
+                <h3 class="team-name">Koordinator PDD</h3>
+                <p class="team-quote">"Mengabadikan setiap momen dalam lensa."</p>
+              </div>
+            </div>
+
+            <!-- Sie PDD 2 -->
+            <div class="glass-card team-card">
+              <div class="team-img-wrapper">
+                <img src="images/Struktur Pengurus/Sie PDD 2.jpeg" alt="Sie PDD 2" class="team-img team-img-pdd2" loading="lazy">
+                <div class="team-overlay"></div>
+              </div>
+              <div class="team-info">
+                <span class="team-role">Sie PDD</span>
+                <h3 class="team-name">Tim Dekorasi & Desain</h3>
+                <p class="team-quote">"Kreativitas tanpa batas untuk visual KKN."</p>
+              </div>
+            </div>
+
+            <!-- Sie Perlengkapan 1 -->
+            <div class="glass-card team-card">
+              <div class="team-img-wrapper">
+                <img src="images/Struktur Pengurus/Sie Perlengkapan 1.jpeg" alt="Sie Perlengkapan 1" class="team-img team-img-perkap1" loading="lazy">
+                <div class="team-overlay"></div>
+              </div>
+              <div class="team-info">
+                <span class="team-role">Sie Perlengkapan (Ketua)</span>
+                <h3 class="team-name">Koordinator Logistik</h3>
+                <p class="team-quote">"Peralatan & teknis selalu siap pakai."</p>
+              </div>
+            </div>
+
+            <!-- Sie Perlengkapan 2 -->
+            <div class="glass-card team-card">
+              <div class="team-img-wrapper">
+                <img src="images/Struktur Pengurus/Sie Perlengkapan 2.jpeg" alt="Sie Perlengkapan 2" class="team-img team-img-perkap2" loading="lazy">
+                <div class="team-overlay"></div>
+              </div>
+              <div class="team-info">
+                <span class="team-role">Sie Perlengkapan</span>
+                <h3 class="team-name">Tim Logistik</h3>
+                <p class="team-quote">"Bahu membahu menyiapkan panggung & proker."</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="slider-btn next-btn" id="team-next" aria-label="Pengurus Selanjutnya">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <!-- Pagination Dots -->
+      <div class="slider-pagination" id="team-pagination"></div>
+    </div>
+  </section>
+
+  <!-- Section: Kata-Kata Kenangan KKN -->
+  <section class="section quotes-section" id="quotes">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <i class="fa-solid fa-heart"></i>
+          <span>Ungkapan & Bisikan Hati</span>
+        </div>
+        <h2 class="section-title">Jejak Kata & Kenangan Tulus</h2>
+        <p class="section-description">
+          Ungkapan tulus yang tertinggal di sudut-sudut Pamulihan. Setiap kata adalah bagian dari rindu, peluh kebersamaan, dan kehangatan persaudaraan kita.
+        </p>
+      </div>
+
+      <!-- Main Highlight Carousel Card -->
+      <div class="quote-highlight-card">
+        <div class="quote-icon">
+          <i class="fa-solid fa-quote-left"></i>
+        </div>
+        <div class="quote-active-text" id="quote-active-text">
+          "Di Desa Pamulihan ini, kita datang sebagai orang asing yang tak saling kenal, lalu pulang sebagai keluarga yang tak ingin berpisah."
+        </div>
+
+        <div class="quote-controls">
+          <button class="btn-icon" id="btn-prev-quote" title="Quote Sebelumnya" aria-label="Quote Sebelumnya">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <button class="btn-icon" id="btn-shuffle-quote" title="Acak Quote Kenangan" aria-label="Acak Quote Kenangan">
+            <i class="fa-solid fa-shuffle"></i>
+          </button>
+          <button class="btn-icon" id="btn-next-quote" title="Quote Selanjutnya" aria-label="Quote Selanjutnya">
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+  <!-- Section: Galeri Foto Dokumentasi (Slider Otomatis Pelan & Lembut) -->
+  <section class="section gallery-section" id="galeri">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <i class="fa-solid fa-camera"></i>
+          <span>Dokumentasi Abadi</span>
+        </div>
+        <h2 class="section-title">Galeri Kenangan KKN</h2>
+        <p class="section-description">
+          Kumpulan momen berharga pengabdian KKN Desa Pamulihan yang bergulir secara otomatis, pelan, dan lembut.
+        </p>
+        <div style="margin-top: 1.25rem;">
+          <button class="btn-primary btn-cinema-mode" id="btn-cinema-mode" type="button">
+            <i class="fa-solid fa-expand text-gold"></i> Tayangkan Layar Penuh (Cinema Mode)
+          </button>
+        </div>
+      </div>
+
+      <!-- Gallery Slider Container -->
+      <div class="gallery-slider-wrapper">
+        <button class="slider-btn prev-btn" id="gallery-prev" aria-label="Foto Sebelumnya">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <div class="gallery-slider-container" id="gallery-slider-container">
+          <div class="gallery-slider-track" id="gallery-slider-track">
+            <!-- Slide 1 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260709-WA0032.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260714-WA0007.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260714-WA0038.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260714-WA0041.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 5 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260715-WA0043.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 6 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260715-WA0090.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 7 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260716-WA0039.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 8 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260717-WA0085.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 9 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260718-WA0015.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 10 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260718-WA0022.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 11 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260719-WA0009(1).jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 12 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260719-WA0062.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 13 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260720-WA0041.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 14 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260720-WA0043.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 15 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260722-WA0022.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 16 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260722-WA0041.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 17 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260723-WA0018.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 18 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260723-WA0024.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 19 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260724-WA0065.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 20 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260725-WA0017(1).jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 21 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260726-WA0044(1).jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 22 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260726-WA0050.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 23 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260726-WA0052.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 24 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260726-WA0054.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 25 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260728-WA0030.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 26 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260728-WA0060.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 27 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260731-WA0063.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 28 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260802-WA0063.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 29 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260803-WA0026.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 30 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260803-WA0029.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 31 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260805-WA0026.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 32 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260805-WA0047.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 33 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260807-WA0083.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 34 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260807-WA0095.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 35 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260807-WA0101.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 36 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260807-WA0111.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 37 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260807-WA0123.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 38 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260807-WA0131.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 39 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260807-WA0154.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 40 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260812-WA0066.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 41 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260815-WA0095.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 42 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260815-WA0114.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 43 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260819-WA0082.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 44 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260819-WA0094.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 45 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260822-WA0028.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 46 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260822-WA0030.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 47 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260822-WA0036(1).jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 48 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260822-WA0040.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 49 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260822-WA0043.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 50 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260822-WA0044.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 51 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260822-WA0045.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 52 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260822-WA0066.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 53 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260823-WA0040.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 54 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260824-WA0016(1).jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 55 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260824-WA0017.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 56 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260824-WA0020(1).jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 57 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260824-WA0025.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 58 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260824-WA0054.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 59 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260824-WA0060.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 60 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260824-WA0068.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 61 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260824-WA0076.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 62 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260824-WA0082.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 63 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260828-WA0116.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 64 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260828-WA0141.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 65 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260828-WA0142.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 66 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260901-WA0033.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 67 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260901-WA0034.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 68 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260901-WA0035.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 69 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260902-WA0000.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 70 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/IMG-20260902-WA0004(1).jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 71 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/motion_photo_1692731666805752768.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 72 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/motion_photo_2770973910391987883.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 73 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/motion_photo_307597548880797051.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 74 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/motion_photo_3237443303552229782.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+
+            <!-- Slide 75 -->
+            <div class="gallery-slide-card">
+              <img src="images/Selama KKN/motion_photo_8181737866052026371.jpg" alt="Dokumentasi KKN Desa Pamulihan" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <button class="slider-btn next-btn" id="gallery-next" aria-label="Foto Selanjutnya">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <!-- Slider Dots -->
+      <div class="slider-pagination" id="gallery-pagination"></div>
+    </div>
+  </section>
+
+  <!-- Section: Video Aftermovie & Dokumentasi KKN -->
+  <section class="section video-section" id="video">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <i class="fa-solid fa-film"></i>
+          <span>Aftermovie & Cinema</span>
+        </div>
+        <h2 class="section-title">Video Dokumentasi KKN</h2>
+        <p class="section-description">
+          Saksikan kembali setiap detik perjuangan, canda tawa, dan momen haru pengabdian KKN Desa Pamulihan dalam tayangan video kenangan.
+        </p>
+      </div>
+
+      <div class="glass-card video-card">
+        <div class="video-container-wrapper" id="video-wrapper">
+          <div class="video-poster" id="video-poster">
+            <img src="images/Selama KKN/IMG-20260901-WA0034.jpg" alt="Cover Video KKN Pamulihan" class="video-cover-img">
+            <div class="video-overlay">
+              <a href="https://youtu.be/sl0ppnj72p8?si=ACG1L8nSAgDKwAk1" target="_blank" class="video-play-btn" id="btn-play-video" title="Tonton Video di YouTube" aria-label="Tonton Video di YouTube">
+                <i class="fa-solid fa-play"></i>
+              </a>
+              <div class="video-title-badge">
+                <span class="badge-live"><i class="fa-brands fa-youtube text-gold"></i> YouTube Dokumentasi Resmi</span>
+                <h3>Aftermovie KKN 05 Desa Pamulihan</h3>
+                <p style="margin-bottom: 1rem;">Klik untuk menonton video kenangan pengabdian di YouTube</p>
+                <a href="https://youtu.be/sl0ppnj72p8?si=ACG1L8nSAgDKwAk1" target="_blank" class="btn-primary btn-yt-direct">
+                  <i class="fa-brands fa-youtube"></i> Tonton Video di YouTube
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Memory Wall (Buku Tamu Kesan Pesan) -->
+  <section class="section memory-wall-section" id="memorywall">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <i class="fa-solid fa-pen-to-square"></i>
+          <span>Pesan & Kesan</span>
+        </div>
+        <h2 class="section-title">Memory Wall KKN</h2>
+        <p class="section-description">
+          Tinggalkan ucapan, kesan, pesan, atau doa untuk teman-teman tim dan warga Desa Pamulihan.
+        </p>
+      </div>
+
+      <div class="memory-grid">
+        <!-- Form Post -->
+        <div class="glass-card memory-form-card">
+          <h3 class="timeline-title" style="margin-bottom: 1.5rem;"><i class="fa-solid fa-paper-plane text-gold"></i> Tulis Pesanmu</h3>
+          <form id="memory-form">
+            <div class="form-group">
+              <label for="author-name" class="form-label">Nama / Panggilan</label>
+              <input type="text" id="author-name" class="form-input" placeholder="Contoh: Budi (Sie Acara)" required>
+            </div>
+            <div class="form-group">
+              <label for="message-body" class="form-label">Kesan, Pesan, atau Doa</label>
+              <textarea id="message-body" class="form-textarea" placeholder="Tuliskan pesan kenanganmu untuk tim KKN..." required></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+              <i class="fa-solid fa-paper-plane"></i> Kirim Ke Memory Wall
+            </button>
+          </form>
+        </div>
+
+        <!-- Posts List -->
+        <div class="wall-posts" id="wall-posts">
+          <!-- Sample Static Post 1 -->
+          <div class="glass-card wall-card">
+            <div class="wall-card-header">
+              <span class="wall-card-author"><i class="fa-solid fa-user-circle"></i> Kordes Pamulihan</span>
+              <span class="wall-card-date">05 September 2026</span>
+            </div>
+            <p class="wall-card-body">
+              "Nggak pernah nyangka sebulan di Pamulihan bisa seberarti ini. Terima kasih udah mau saling melengkapi, sabar menghadapi satu sama lain, dan merangkai tawa di sela lelah. Kalian adalah tempat pulang paling hangat selama KKN."
+            </p>
+          </div>
+
+          <!-- Sample Static Post 2 -->
+          <div class="glass-card wall-card">
+            <div class="wall-card-header">
+              <span class="wall-card-author"><i class="fa-solid fa-user-circle"></i> Teman Posko</span>
+              <span class="wall-card-date">04 September 2026</span>
+            </div>
+            <p class="wall-card-body">
+              "Terima kasih untuk Desa Pamulihan dan warga yang udah menyambut kita seperti keluarga sendiri. Dan untuk teman-teman tim, sukses selalu di jalan kita masing-masing. Sampai bertemu lagi di panggung kesuksesan ya!"
+            </p>
+          </div>
+
+          <!-- Sample Static Post 3 -->
+          <div class="glass-card wall-card">
+            <div class="wall-card-header">
+              <span class="wall-card-author"><i class="fa-solid fa-user-circle"></i> Rekan Pengabdian</span>
+              <span class="wall-card-date">03 September 2026</span>
+            </div>
+            <p class="wall-card-body">
+              "Suatu hari nanti saat kita sudah sibuk dengan dunia masing-masing, semoga website kenangan ini bisa jadi pelukan hangat yang mengingatkan kalau kita pernah begitu dekat dan berjuang tulus bersama."
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-brand">
+        <img src="images/Logo KKN.png" alt="Logo KKN Pamulihan" class="footer-logo-img">
+        <h3 class="footer-title">Jejak Pamulihan <span class="text-gold-bright">Memories</span></h3>
+      </div>
+      <p class="footer-desc">
+        Di sudut Desa Pamulihan, kita mengukir jejak, tawa, dan cerita yang tak akan pudar oleh waktu. Terima kasih pernah berjuang dan melangkah bersama—karena sebulan kebersamaan ini adalah kenangan abadi seumur hidup kita.
+      </p>
+
+      <div class="footer-socials">
+        <a href="https://github.com" target="_blank" class="social-link" title="GitHub Repository"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.instagram.com/jejakpamulihan?igsi=ZGw3NWtocnhidTlv" target="_blank" class="social-link" title="Instagram KKN"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://youtu.be/sl0ppnj72p8?si=VC_U71ma05OSe8fu" target="_blank" class="social-link" title="Dokumentasi Video"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Jejak Pamulihan Memories. Created with <i class="fa-solid fa-heart text-gold"></i> for KKN Pamulihan.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Tutup Lightbox">&times;</button>
+    <div class="lightbox-content">
+      <img id="lightbox-img" src="" alt="Preview Foto Dokumentasi">
+    </div>
+  </div>
+
+  <!-- Cinema Mode Fullscreen Presentation Modal -->
+  <div class="cinema-modal" id="cinema-modal">
+    <div class="cinema-backdrop"></div>
+    <div class="cinema-container">
+      <!-- Header Bar -->
+      <div class="cinema-header">
+        <div class="cinema-badge">
+          <i class="fa-solid fa-film text-gold"></i>
+          <span id="cinema-counter">Foto 1 dari 75</span>
+        </div>
+        <button class="cinema-close" id="cinema-close" title="Tutup Layar Penuh" aria-label="Tutup Layar Penuh">&times;</button>
+      </div>
+
+      <!-- Main Photo Display -->
+      <div class="cinema-view">
+        <img id="cinema-img" src="" alt="Tayangan Dokumentasi KKN">
+        <div class="cinema-progress-bar"><div class="cinema-progress-fill" id="cinema-progress-fill"></div></div>
+      </div>
+
+      <!-- Control Bar -->
+      <div class="cinema-controls">
+        <button class="btn-cinema-action" id="cinema-prev" title="Foto Sebelumnya" aria-label="Foto Sebelumnya"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="btn-cinema-action btn-cinema-play" id="cinema-play-pause" title="Jeda / Putar Tayangan" aria-label="Jeda / Putar Tayangan"><i class="fa-solid fa-pause"></i></button>
+        <button class="btn-cinema-action" id="cinema-next" title="Foto Selanjutnya" aria-label="Foto Selanjutnya"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="back-to-top" title="Kembali ke Atas" aria-label="Kembali ke Atas">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <!-- Script File -->
+  <script src="script.js"></script>
+</body>
+</html>
