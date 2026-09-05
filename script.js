@@ -529,7 +529,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (GOOGLE_SHEET_URL) {
         try {
           const saveUrl = `${GOOGLE_SHEET_URL}?action=add&author=${encodeURIComponent(author)}&date=${encodeURIComponent(dateStr)}&message=${encodeURIComponent(message)}`;
-          await fetch(saveUrl);
+          await fetch(saveUrl, { mode: 'no-cors' });
           savedToCloud = true;
           showMemoryStatus('<i class="fa-solid fa-cloud-check"></i> Pesan berhasil dikirim ke Cloud & dapat dilihat semua teman!', false);
         } catch (err) {
