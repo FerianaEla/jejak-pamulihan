@@ -1127,4 +1127,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* --- 15. Surat Kasih Sayang Tab Switcher --- */
+  const letterTabs = document.querySelectorAll('.letter-tab');
+  const letterPanels = document.querySelectorAll('.letter-panel');
+
+  letterTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetId = tab.getAttribute('data-target');
+
+      letterTabs.forEach(t => t.classList.remove('active'));
+      letterPanels.forEach(p => p.classList.remove('active'));
+
+      tab.classList.add('active');
+      const activePanel = document.getElementById(targetId);
+      if (activePanel) activePanel.classList.add('active');
+    });
+  });
+
 });
