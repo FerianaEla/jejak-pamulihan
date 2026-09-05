@@ -926,7 +926,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* --- 12. Pure White Twinkling Stardust Ambient Canvas Particles --- */
+  /* --- 12. GPU-Optimized Pure White Twinkling Stardust Particles Canvas --- */
   const pCanvas = document.getElementById('bg-particles');
   if (pCanvas) {
     const ctx = pCanvas.getContext('2d');
@@ -936,38 +936,34 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', () => {
       width = pCanvas.width = window.innerWidth;
       height = pCanvas.height = window.innerHeight;
-    });
+    }, { passive: true });
 
     const particles = [];
-    const particleCount = 60;
+    const particleCount = 28; // Optimized particle density
     const whiteColors = [
       'rgba(255, 255, 255, ',
       'rgba(240, 246, 255, ',
-      'rgba(224, 242, 254, ',
-      'rgba(255, 255, 255, '
+      'rgba(224, 242, 254, '
     ];
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        radius: Math.random() * 2.4 + 0.8,
+        radius: Math.random() * 2.2 + 0.8,
         colorPrefix: whiteColors[Math.floor(Math.random() * whiteColors.length)],
-        alpha: Math.random() * 0.75 + 0.25,
-        speedY: Math.random() * 0.45 + 0.12,
-        speedX: Math.random() * 0.3 - 0.15,
-        pulseSpeed: Math.random() * 0.025 + 0.01,
+        alpha: Math.random() * 0.7 + 0.3,
+        speedY: Math.random() * 0.35 + 0.1,
+        speedX: Math.random() * 0.25 - 0.12,
         pulseOffset: Math.random() * Math.PI * 2,
-        isSparkleStar: Math.random() < 0.4 // 40% are glowing 4-point white stars!
+        isSparkleStar: Math.random() < 0.35
       });
     }
 
-    function drawWhiteStar(cx, cy, outerR, innerR, alpha) {
-      ctx.save();
+    // Fast 4-point star path without expensive canvas shadowBlur
+    function drawWhiteStarFast(cx, cy, outerR, innerR, alpha) {
       ctx.beginPath();
       ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
-      ctx.shadowBlur = 14;
-      ctx.shadowColor = 'rgba(255, 255, 255, 0.95)';
 
       let rot = Math.PI / 2 * 3;
       let x = cx;
@@ -989,7 +985,6 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.lineTo(cx, cy - outerR);
       ctx.closePath();
       ctx.fill();
-      ctx.restore();
     }
 
     let timeStep = 0;
@@ -999,27 +994,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
       particles.forEach(p => {
         p.y -= p.speedY;
-        p.x += Math.sin(timeStep + p.pulseOffset) * 0.35 + p.speedX;
+        p.x += Math.sin(timeStep + p.pulseOffset) * 0.3 + p.speedX;
 
-        // Reset particle if it drifts off screen
         if (p.y < -10) p.y = height + 10;
         if (p.x < -10) p.x = width + 10;
         if (p.x > width + 10) p.x = -10;
 
-        const dynamicAlpha = Math.max(0.15, p.alpha * (0.55 + 0.45 * Math.sin(timeStep * 3 + p.pulseOffset)));
+        const dynamicAlpha = Math.max(0.2, p.alpha * (0.6 + 0.4 * Math.sin(timeStep * 2.5 + p.pulseOffset)));
 
         if (p.isSparkleStar) {
-          const starSize = p.radius * 2.4;
-          drawWhiteStar(p.x, p.y, starSize, starSize * 0.35, dynamicAlpha);
+          const starSize = p.radius * 2.2;
+          drawWhiteStarFast(p.x, p.y, starSize, starSize * 0.35, dynamicAlpha);
         } else {
-          ctx.save();
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
           ctx.fillStyle = p.colorPrefix + dynamicAlpha + ')';
-          ctx.shadowBlur = 12;
-          ctx.shadowColor = 'rgba(255, 255, 255, 0.85)';
           ctx.fill();
-          ctx.restore();
         }
       });
 
