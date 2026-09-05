@@ -381,12 +381,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  /* --- 8. Memory Wall (LocalStorage Kesan & Pesan) --- */
+  /* --- 8. Memory Wall (Google Sheets / Supabase Cloud & LocalStorage) --- */
   const memoryForm = document.getElementById('memory-form');
   const wallPostsContainer = document.getElementById('wall-posts');
+  const memoryStatus = document.getElementById('memory-status');
+
+  // GOOGLE SHEETS CLOUD STORAGE (Sangat Mudah - Gratis Pakai Google Apps Script)
+  // Tempelkan Web App URL dari Google Apps Script di sini (Contoh: 'https://script.google.com/macros/s/XXX/exec')
+  const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxzLe0MKzOQEIvg-fiZkUe7wN6xUy-MHVfntnjmR6U4bhRS-U0wp3CIUzMHQzrKzm3g/exec'; 
+
+  // SUPABASE CLOUD STORAGE (Opsional)
+  const SUPABASE_URL = ''; // Contoh: 'https://xyzproject.supabase.co'
+  const SUPABASE_ANON_KEY = ''; // Anon public key dari Dashboard Supabase
+
+  let supabaseClient = null;
+  if (window.supabase && SUPABASE_URL && SUPABASE_ANON_KEY) {
+    try {
+      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    } catch (err) {
+      console.warn('Supabase initialization failed:', err);
+    }
+  }
 
   // Helper to sanitize text
   function sanitizeHTML(str) {
+    if (!str) return '';
     return str.replace(/[&<>'"]/g, 
       tag => ({
         '&': '&amp;',
@@ -398,15 +417,27 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   }
 
-  // Load existing posts from LocalStorage
-  function loadMemoryPosts() {
-    const savedPosts = JSON.parse(localStorage.getItem('pamulihan_memories') || '[]');
-    savedPosts.forEach(post => {
-      renderPostCard(post.author, post.date, post.message, false);
-    });
+  function showMemoryStatus(text, isError = false) {
+    if (!memoryStatus) return;
+    memoryStatus.style.display = 'block';
+    memoryStatus.style.background = isError ? 'rgba(239, 68, 68, 0.15)' : 'rgba(16, 185, 129, 0.15)';
+    memoryStatus.style.color = isError ? '#f87171' : 'var(--emerald-light)';
+    memoryStatus.style.border = isError ? '1px solid rgba(239, 68, 68, 0.3)' : '1px solid rgba(16, 185, 129, 0.3)';
+    memoryStatus.innerHTML = text;
+
+    setTimeout(() => {
+      memoryStatus.style.display = 'none';
+    }, 5000);
   }
 
+  const renderedPostKeys = new Set();
+
   function renderPostCard(author, date, message, prepend = true) {
+    if (!wallPostsContainer) return;
+    const postKey = `${author.trim()}_${message.trim()}`;
+    if (renderedPostKeys.has(postKey)) return; // Prevents duplicate post rendering
+    renderedPostKeys.add(postKey);
+
     const card = document.createElement('div');
     card.className = 'glass-card wall-card';
     card.innerHTML = `
@@ -426,8 +457,52 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Load existing posts from LocalStorage first, then fetch Cloud DB (Google Sheet / Supabase)
+  async function loadMemoryPosts() {
+    // 1. Load local cache
+    const savedPosts = JSON.parse(localStorage.getItem('pamulihan_memories') || '[]');
+    savedPosts.forEach(post => {
+      renderPostCard(post.author, post.date, post.message, false);
+    });
+
+    // 2. Fetch from Google Sheet Cloud DB if connected
+    if (GOOGLE_SHEET_URL) {
+      try {
+        const res = await fetch(GOOGLE_SHEET_URL);
+        const result = await res.json();
+        if (result && result.status === 'success' && Array.isArray(result.data)) {
+          result.data.forEach(item => {
+            if (item.author && item.message) {
+              renderPostCard(item.author, item.date || 'Kenangan KKN', item.message, true);
+            }
+          });
+        }
+      } catch (err) {
+        console.warn('Failed to load posts from Google Sheet:', err);
+      }
+    }
+
+    // 3. Fetch from Supabase Cloud DB if connected
+    if (supabaseClient) {
+      try {
+        const { data, error } = await supabaseClient
+          .from('memory_wall')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (!error && data && data.length) {
+          data.forEach(item => {
+            renderPostCard(item.author, item.date || 'Kenangan KKN', item.message, true);
+          });
+        }
+      } catch (err) {
+        console.warn('Failed to load posts from Supabase Cloud DB:', err);
+      }
+    }
+  }
+
   if (memoryForm) {
-    memoryForm.addEventListener('submit', (e) => {
+    memoryForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const authorInput = document.getElementById('author-name');
       const messageInput = document.getElementById('message-body');
@@ -440,13 +515,47 @@ document.addEventListener('DOMContentLoaded', () => {
       const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
       const dateStr = new Date().toLocaleDateString('id-ID', dateOptions);
 
-      // Render to DOM
+      // Render to DOM immediately
       renderPostCard(author, dateStr, message, true);
 
-      // Save to LocalStorage
+      // Save to LocalStorage (Immediate local backup)
       const savedPosts = JSON.parse(localStorage.getItem('pamulihan_memories') || '[]');
       savedPosts.unshift({ author, date: dateStr, message });
       localStorage.setItem('pamulihan_memories', JSON.stringify(savedPosts));
+
+      let savedToCloud = false;
+
+      // Save to Google Sheet if configured
+      if (GOOGLE_SHEET_URL) {
+        try {
+          const saveUrl = `${GOOGLE_SHEET_URL}?action=add&author=${encodeURIComponent(author)}&date=${encodeURIComponent(dateStr)}&message=${encodeURIComponent(message)}`;
+          await fetch(saveUrl);
+          savedToCloud = true;
+          showMemoryStatus('<i class="fa-solid fa-cloud-check"></i> Pesan berhasil dikirim ke Cloud & dapat dilihat semua teman!', false);
+        } catch (err) {
+          console.warn('Failed saving to Google Sheet:', err);
+        }
+      }
+
+      // Save to Supabase DB if configured
+      if (supabaseClient) {
+        try {
+          const { error } = await supabaseClient
+            .from('memory_wall')
+            .insert([{ author, message, date: dateStr }]);
+
+          if (!error) {
+            savedToCloud = true;
+            showMemoryStatus('<i class="fa-solid fa-cloud-check"></i> Pesan berhasil dikirim & tersimpan di Cloud!', false);
+          }
+        } catch (err) {
+          console.warn('Failed saving to Supabase:', err);
+        }
+      }
+
+      if (!savedToCloud) {
+        showMemoryStatus('<i class="fa-solid fa-check-circle"></i> Pesan tersimpan di browser ini! Hubungkan Cloud DB agar bisa dilihat dari semua HP.', false);
+      }
 
       // Reset Form
       authorInput.value = '';
