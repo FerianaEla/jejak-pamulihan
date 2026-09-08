@@ -351,8 +351,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightboxImg = document.getElementById('lightbox-img');
   const lightboxClose = document.getElementById('lightbox-close');
 
-  // Add click event for all gallery slides and team card images
-  const clickableImages = document.querySelectorAll('.gallery-slide-card img, .team-img-wrapper img');
+  // Add click event for all gallery slides, team card images, and polaroid candid images
+  const clickableImages = document.querySelectorAll('.gallery-slide-card img, .team-img-wrapper img, .polaroid-card img');
 
   clickableImages.forEach(img => {
     img.addEventListener('click', () => {
@@ -1285,5 +1285,288 @@ document.addEventListener('DOMContentLoaded', () => {
       if (activePanel) activePanel.classList.add('active');
     });
   });
+
+  /* --- 16. Interactive 3D Coverflow Candid Slider (105 Photos) --- */
+  const candidPhotos = [
+    "Screenshot 2026-09-08 182249.png",
+    "Screenshot 2026-09-08 182316.png",
+    "Screenshot 2026-09-08 182328.png",
+    "Screenshot 2026-09-08 182338.png",
+    "Screenshot 2026-09-08 182346.png",
+    "Screenshot 2026-09-08 182352.png",
+    "Screenshot 2026-09-08 182401.png",
+    "Screenshot 2026-09-08 182408.png",
+    "Screenshot 2026-09-08 182415.png",
+    "Screenshot 2026-09-08 182425.png",
+    "Screenshot 2026-09-08 182433.png",
+    "Screenshot 2026-09-08 182439.png",
+    "Screenshot 2026-09-08 182447.png",
+    "Screenshot 2026-09-08 182501.png",
+    "Screenshot 2026-09-08 182506.png",
+    "Screenshot 2026-09-08 182533.png",
+    "Screenshot 2026-09-08 182543.png",
+    "Screenshot 2026-09-08 182555.png",
+    "Screenshot 2026-09-08 182603.png",
+    "Screenshot 2026-09-08 182611.png",
+    "Screenshot 2026-09-08 182619.png",
+    "Screenshot 2026-09-08 182628.png",
+    "Screenshot 2026-09-08 182637.png",
+    "Screenshot 2026-09-08 182646.png",
+    "Screenshot 2026-09-08 182652.png",
+    "Screenshot 2026-09-08 182701.png",
+    "Screenshot 2026-09-08 182709.png",
+    "Screenshot 2026-09-08 182718.png",
+    "Screenshot 2026-09-08 182726.png",
+    "Screenshot 2026-09-08 182734.png",
+    "Screenshot 2026-09-08 182740.png",
+    "Screenshot 2026-09-08 182748.png",
+    "Screenshot 2026-09-08 182755.png",
+    "Screenshot 2026-09-08 182803.png",
+    "Screenshot 2026-09-08 182810.png",
+    "Screenshot 2026-09-08 182818.png",
+    "Screenshot 2026-09-08 182825.png",
+    "Screenshot 2026-09-08 182831.png",
+    "Screenshot 2026-09-08 182837.png",
+    "Screenshot 2026-09-08 182845.png",
+    "Screenshot 2026-09-08 182851.png",
+    "Screenshot 2026-09-08 182859.png",
+    "Screenshot 2026-09-08 182905.png",
+    "Screenshot 2026-09-08 182911.png",
+    "Screenshot 2026-09-08 182918.png",
+    "Screenshot 2026-09-08 182924.png",
+    "Screenshot 2026-09-08 182932.png",
+    "Screenshot 2026-09-08 182939.png",
+    "Screenshot 2026-09-08 182945.png",
+    "Screenshot 2026-09-08 182951.png",
+    "Screenshot 2026-09-08 182958.png",
+    "Screenshot 2026-09-08 183011.png",
+    "Screenshot 2026-09-08 183017.png",
+    "Screenshot 2026-09-08 183025.png",
+    "Screenshot 2026-09-08 183031.png",
+    "Screenshot 2026-09-08 183037.png",
+    "Screenshot 2026-09-08 183045.png",
+    "Screenshot 2026-09-08 183052.png",
+    "Screenshot 2026-09-08 183100.png",
+    "Screenshot 2026-09-08 183107.png",
+    "Screenshot 2026-09-08 183115.png",
+    "Screenshot 2026-09-08 183122.png",
+    "Screenshot 2026-09-08 183129.png",
+    "Screenshot 2026-09-08 183136.png",
+    "Screenshot 2026-09-08 183143.png",
+    "Screenshot 2026-09-08 183149.png",
+    "Screenshot 2026-09-08 183156.png",
+    "Screenshot 2026-09-08 183203.png",
+    "Screenshot 2026-09-08 183209.png",
+    "Screenshot 2026-09-08 183217.png",
+    "Screenshot 2026-09-08 183223.png",
+    "Screenshot 2026-09-08 183229.png",
+    "Screenshot 2026-09-08 183235.png",
+    "Screenshot 2026-09-08 183241.png",
+    "Screenshot 2026-09-08 183248.png",
+    "Screenshot 2026-09-08 183257.png",
+    "Screenshot 2026-09-08 183305.png",
+    "Screenshot 2026-09-08 183313.png",
+    "Screenshot 2026-09-08 183318.png",
+    "Screenshot 2026-09-08 183324.png",
+    "Screenshot 2026-09-08 183332.png",
+    "Screenshot 2026-09-08 183338.png",
+    "Screenshot 2026-09-08 183344.png",
+    "Screenshot 2026-09-08 183350.png",
+    "Screenshot 2026-09-08 183357.png",
+    "Screenshot 2026-09-08 183403.png",
+    "Screenshot 2026-09-08 183409.png",
+    "Screenshot 2026-09-08 183416.png",
+    "Screenshot 2026-09-08 183423.png",
+    "Screenshot 2026-09-08 183429.png",
+    "Screenshot 2026-09-08 183434.png",
+    "Screenshot 2026-09-08 183441.png",
+    "Screenshot 2026-09-08 183447.png",
+    "Screenshot 2026-09-08 183453.png",
+    "Screenshot 2026-09-08 183458.png",
+    "Screenshot 2026-09-08 183506.png",
+    "Screenshot 2026-09-08 183513.png",
+    "Screenshot 2026-09-08 183521.png",
+    "WhatsApp Image 2026-09-08 at 18.16.08.jpeg",
+    "WhatsApp Image 2026-09-08 at 18.16.24.jpeg",
+    "WhatsApp Image 2026-09-08 at 18.16.25.jpeg",
+    "WhatsApp Image 2026-09-08 at 18.16.32 (1).jpeg",
+    "WhatsApp Image 2026-09-08 at 18.16.32.jpeg",
+    "WhatsApp Image 2026-09-08 at 18.16.33.jpeg",
+    "WhatsApp Image 2026-09-08 at 18.16.34.jpeg"
+  ];
+
+  const candidStage = document.getElementById('candid-3d-stage');
+  const candidPrevBtn = document.getElementById('candid-3d-prev');
+  const candidNextBtn = document.getElementById('candid-3d-next');
+  const candidPlayBtn = document.getElementById('candid-3d-play');
+  const candidCounter = document.getElementById('candid-3d-counter');
+  const candidWrapper = document.querySelector('.candid-3d-wrapper');
+
+  if (candidStage && candidPhotos.length > 0) {
+    let currentCandidIndex = 0;
+    let isCandidAutoPlaying = true;
+    let candidAutoTimer = null;
+    let candidCardElements = [];
+
+    // Render Cards dynamically
+    candidPhotos.forEach((filename, idx) => {
+      const card = document.createElement('div');
+      card.className = 'candid-3d-card';
+      const imgSrc = `images/Candid/${encodeURIComponent(filename)}`;
+
+      card.innerHTML = `
+        <div class="candid-3d-img-box">
+          <img src="${imgSrc}" alt="Momen Candid KKN Pamulihan ${idx + 1}" loading="lazy">
+        </div>
+        <div class="candid-3d-footer">
+          <span class="candid-3d-badge"><i class="fa-solid fa-face-laugh"></i> Candid #${idx + 1}</span>
+          <span><i class="fa-solid fa-expand text-gold"></i> Fullscreen</span>
+        </div>
+      `;
+
+      // Lightbox click handler
+      card.addEventListener('click', () => {
+        if (idx === currentCandidIndex) {
+          lightboxImg.src = imgSrc;
+          lightbox.classList.add('active');
+        } else {
+          currentCandidIndex = idx;
+          update3DStage();
+        }
+      });
+
+      candidStage.appendChild(card);
+      candidCardElements.push(card);
+    });
+
+    function update3DStage() {
+      const total = candidPhotos.length;
+      const isMobile = window.innerWidth <= 768;
+      const spacingX = isMobile ? 160 : 250;
+      const depthZ = isMobile ? 110 : 170;
+
+      candidCardElements.forEach((card, idx) => {
+        let diff = idx - currentCandidIndex;
+
+        // Circular loop distance calculation
+        if (diff > total / 2) diff -= total;
+        if (diff < -total / 2) diff += total;
+
+        card.classList.remove('active-center');
+
+        if (diff === 0) {
+          // Center active photo
+          card.style.transform = `translate3d(0, 0, ${depthZ}px) rotateY(0deg)`;
+          card.style.opacity = '1';
+          card.style.zIndex = '100';
+          card.style.pointerEvents = 'auto';
+          card.classList.add('active-center');
+        } else if (Math.abs(diff) <= 3) {
+          // Visible adjacent 3D cards
+          const sign = diff > 0 ? 1 : -1;
+          const absDiff = Math.abs(diff);
+          const translateX = sign * (spacingX * Math.pow(absDiff, 0.85));
+          const rotateY = -sign * (25 + absDiff * 10);
+          const translateZ = depthZ - (absDiff * 80);
+          const opacity = Math.max(0.2, 1 - (absDiff * 0.28));
+          const zIndex = 100 - absDiff * 10;
+
+          card.style.transform = `translate3d(${translateX}px, 0, ${translateZ}px) rotateY(${rotateY}deg)`;
+          card.style.opacity = opacity.toFixed(2);
+          card.style.zIndex = zIndex.toString();
+          card.style.pointerEvents = 'auto';
+        } else {
+          // Hidden distant cards
+          const sign = diff > 0 ? 1 : -1;
+          card.style.transform = `translate3d(${sign * 600}px, 0, -400px) rotateY(${sign * -75}deg) scale(0)`;
+          card.style.opacity = '0';
+          card.style.zIndex = '0';
+          card.style.pointerEvents = 'none';
+        }
+      });
+
+      // Update counter badge
+      if (candidCounter) {
+        candidCounter.innerHTML = `<i class="fa-solid fa-camera-retro text-gold"></i> Foto <strong>${currentCandidIndex + 1}</strong> dari <strong>${total}</strong>`;
+      }
+    }
+
+    function startCandidAutoPlay() {
+      stopCandidAutoPlay();
+      isCandidAutoPlaying = true;
+      if (candidPlayBtn) {
+        candidPlayBtn.innerHTML = '<i class="fa-solid fa-pause"></i> <span>Jeda Slide 3D</span>';
+      }
+      candidAutoTimer = setInterval(() => {
+        currentCandidIndex = (currentCandidIndex + 1) % candidPhotos.length;
+        update3DStage();
+      }, 3200);
+    }
+
+    function stopCandidAutoPlay() {
+      isCandidAutoPlaying = false;
+      if (candidAutoTimer) clearInterval(candidAutoTimer);
+      if (candidPlayBtn) {
+        candidPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i> <span>Putar Slide 3D</span>';
+      }
+    }
+
+    if (candidPrevBtn) {
+      candidPrevBtn.addEventListener('click', () => {
+        currentCandidIndex = (currentCandidIndex - 1 + candidPhotos.length) % candidPhotos.length;
+        update3DStage();
+      });
+    }
+
+    if (candidNextBtn) {
+      candidNextBtn.addEventListener('click', () => {
+        currentCandidIndex = (currentCandidIndex + 1) % candidPhotos.length;
+        update3DStage();
+      });
+    }
+
+    if (candidPlayBtn) {
+      candidPlayBtn.addEventListener('click', () => {
+        if (isCandidAutoPlaying) {
+          stopCandidAutoPlay();
+        } else {
+          startCandidAutoPlay();
+        }
+      });
+    }
+
+    if (candidWrapper) {
+      candidWrapper.addEventListener('mouseenter', () => {
+        if (isCandidAutoPlaying && candidAutoTimer) clearInterval(candidAutoTimer);
+      });
+      candidWrapper.addEventListener('mouseleave', () => {
+        if (isCandidAutoPlaying) startCandidAutoPlay();
+      });
+    }
+
+    // Touch Swipe Support
+    let startX3D = 0;
+    candidStage.addEventListener('touchstart', (e) => {
+      startX3D = e.touches[0].clientX;
+    }, { passive: true });
+
+    candidStage.addEventListener('touchend', (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const diffX = startX3D - endX;
+      if (Math.abs(diffX) > 40) {
+        if (diffX > 0) {
+          currentCandidIndex = (currentCandidIndex + 1) % candidPhotos.length;
+        } else {
+          currentCandidIndex = (currentCandidIndex - 1 + candidPhotos.length) % candidPhotos.length;
+        }
+        update3DStage();
+      }
+    });
+
+    window.addEventListener('resize', update3DStage);
+
+    update3DStage();
+    startCandidAutoPlay();
+  }
 
 });
