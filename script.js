@@ -1416,7 +1416,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       card.innerHTML = `
         <div class="candid-3d-img-box">
-          <img src="${imgSrc}" alt="Momen Candid KKN Pamulihan ${idx + 1}" loading="lazy">
+          <img src="${imgSrc}" alt="Momen Candid KKN Pamulihan ${idx + 1}" loading="lazy" decoding="async">
         </div>
         <div class="candid-3d-footer">
           <span class="candid-3d-badge"><i class="fa-solid fa-face-laugh"></i> Candid #${idx + 1}</span>
@@ -1456,6 +1456,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (diff === 0) {
           // Center active photo
+          card.style.display = 'flex';
           card.style.transform = `translate3d(0, 0, ${depthZ}px) rotateY(0deg)`;
           card.style.opacity = '1';
           card.style.zIndex = '100';
@@ -1463,6 +1464,7 @@ document.addEventListener('DOMContentLoaded', () => {
           card.classList.add('active-center');
         } else if (Math.abs(diff) <= 3) {
           // Visible adjacent 3D cards
+          card.style.display = 'flex';
           const sign = diff > 0 ? 1 : -1;
           const absDiff = Math.abs(diff);
           const translateX = sign * (spacingX * Math.pow(absDiff, 0.85));
@@ -1476,9 +1478,8 @@ document.addEventListener('DOMContentLoaded', () => {
           card.style.zIndex = zIndex.toString();
           card.style.pointerEvents = 'auto';
         } else {
-          // Hidden distant cards
-          const sign = diff > 0 ? 1 : -1;
-          card.style.transform = `translate3d(${sign * 600}px, 0, -400px) rotateY(${sign * -75}deg) scale(0)`;
+          // Hide distant cards completely from browser layout & paint tree for 60 FPS performance
+          card.style.display = 'none';
           card.style.opacity = '0';
           card.style.zIndex = '0';
           card.style.pointerEvents = 'none';

@@ -2071,8 +2071,8 @@ img {
   width: 320px;
   height: 420px;
   background: rgba(12, 28, 22, 0.88);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: var(--radius-lg);
   padding: 1rem;
@@ -2085,6 +2085,9 @@ img {
   align-items: center;
   justify-content: space-between;
   will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
 }
 
 .candid-3d-card.active-center {
